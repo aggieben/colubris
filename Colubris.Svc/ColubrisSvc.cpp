@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "messages-en.h"
 
-#define SVCNAME TEXT("Concorde")
+#define SVCNAME TEXT("Colubris")
 
 SERVICE_STATUS          gSvcStatus;
 SERVICE_STATUS_HANDLE   gSvcStatusHandle;
