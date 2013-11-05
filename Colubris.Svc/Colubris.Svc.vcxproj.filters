@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="ColubrisSvc.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="webhost_listener.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="webhost_default.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="messages-en.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="webhost_listener.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="mini_profiler.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="webhost_interface.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="webhost_default.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{4d82934a-3d11-4633-b4f5-371b59ed3da1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{ceb4e969-d2ec-4698-888e-0b8cafdfd9f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{f8d01c8d-6073-4130-8712-8e138eaf5caf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BuildMC.bat">
+      <Filter>Resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="messages-en.mc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

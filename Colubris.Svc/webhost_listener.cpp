@@ -1,18 +1,25 @@
 #include "stdafx.h"
 #include "webhost_listener.hpp"
 
-colubris::webhost_listener::webhost_listener()
+colubris::webhost_listener::webhost_listener(webhost_interface *webhost)
 {
 	init_callbacks();
 	_protocol_handle = 0;
+	_webhost = webhost;
 }
 
 bool colubris::webhost_listener::start()
 {
-	HRESULT hr = WebhostRegisterProtocol(L"protocol", &_whl_callbacks, this, &this->_protocol_handle);
+	HRESULT hr = _webhost->register_protocol(L"protocol", &_whl_callbacks, this, &this->_protocol_handle);
 	if (hr != S_OK)
 	{
 		// handle error here
+		OutputDebugString(L"failed to register protocol.");
+		return false;
+	}
+	else
+	{
+		return true;
 	}
 }
 

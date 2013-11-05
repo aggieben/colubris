@@ -1,11 +1,12 @@
 #pragma once
 #include "stdafx.h"
 #include <listeneradapter.h>
+#include "webhost_interface.hpp"
 
 namespace colubris {
 	class webhost_listener {
 	public:
-		webhost_listener();
+		webhost_listener(webhost_interface *webhost);
 		bool start();
 		bool stop();
 
@@ -27,6 +28,7 @@ namespace colubris {
 		void on_apppool_allstop_impl(const wchar_t *apppool_id, unsigned long channel_id);
 
 	private:
+		webhost_interface *_webhost;
 		WEBHOST_LISTENER_CALLBACKS _whl_callbacks;
 		unsigned long _protocol_handle;
 		void init_callbacks();
