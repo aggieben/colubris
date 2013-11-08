@@ -143,14 +143,14 @@ VOID SvcInit(DWORD dwArgc, LPTSTR *lpszArgv)
 	ReportSvcStatus(SERVICE_RUNNING, NO_ERROR, 0);
 
 	// TO_DO: Perform work until service stops.
-	auto webhost = new colubris::webhost_default();
+	/*auto webhost = new colubris::webhost_default();
 	auto listener = new colubris::webhost_listener(webhost);
 	if (!listener->start())
 	{
 		SvcReportEvent(TEXT("colubris::webhost_listener::start"));
 		ReportSvcStatus(SERVICE_STOPPED, ERROR, 0);
 		return;
-	}
+	}*/
 
 	while (1)
 	{

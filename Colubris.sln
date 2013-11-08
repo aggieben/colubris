@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Colubris.Svc", "Colubris.Sv
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Colubris.Listener", "Colubris.Listener\Colubris.Listener.vcxproj", "{301D400A-B6FD-4CD4-A84F-2A0457574708}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Colubris.Console", "Colubris.Console\Colubris.Console.vcxproj", "{1D9E7728-368C-49C4-96DC-01CB11230844}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -21,6 +23,10 @@ Global
 		{301D400A-B6FD-4CD4-A84F-2A0457574708}.Debug|Win32.Build.0 = Debug|Win32
 		{301D400A-B6FD-4CD4-A84F-2A0457574708}.Release|Win32.ActiveCfg = Release|Win32
 		{301D400A-B6FD-4CD4-A84F-2A0457574708}.Release|Win32.Build.0 = Release|Win32
+		{1D9E7728-368C-49C4-96DC-01CB11230844}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1D9E7728-368C-49C4-96DC-01CB11230844}.Debug|Win32.Build.0 = Debug|Win32
+		{1D9E7728-368C-49C4-96DC-01CB11230844}.Release|Win32.ActiveCfg = Release|Win32
+		{1D9E7728-368C-49C4-96DC-01CB11230844}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
