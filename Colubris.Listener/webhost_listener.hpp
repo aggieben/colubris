@@ -1,10 +1,10 @@
 #pragma once
-#include "stdafx.h"
 #include <listeneradapter.h>
+#include "api.hpp"
 #include "webhost_interface.hpp"
 
 namespace colubris {
-	class webhost_listener {
+	COLUBRISLISTENER_API class webhost_listener {
 	public:
 		webhost_listener(webhost_interface *webhost);
 		bool start();

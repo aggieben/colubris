@@ -14,3 +14,14 @@
 
 
 // TODO: reference additional headers your program requires here
+
+//// This class is exported from the Colubris.Listener.dll
+//class COLUBRISLISTENER_API CColubrisListener {
+//public:
+//	CColubrisListener(void);
+//	// TODO: add your methods here.
+//};
+//
+//extern COLUBRISLISTENER_API int nColubrisListener;
+//
+//COLUBRISLISTENER_API int fnColubrisListener(void);

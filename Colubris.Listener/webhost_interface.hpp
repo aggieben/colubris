@@ -1,8 +1,9 @@
 #pragma once
 #include <Windows.h>
+#include "api.hpp"
 
 namespace colubris {
-	class webhost_interface
+	COLUBRISLISTENER_API class webhost_interface
 	{
 	public:
 		typedef HRESULT(__stdcall *fn_close_all_listener_channel_instances_t)(DWORD protocol_handle, LPCWSTR apppool_id, DWORD channel_id);
