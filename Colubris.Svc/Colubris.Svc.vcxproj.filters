@@ -24,16 +24,7 @@
     <ClInclude Include="targetver.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="webhost_listener.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="mini_profiler.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="webhost_interface.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="webhost_default.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
