@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "webhost_interface.hpp"
 #include "webhost_listener.hpp"
 
 colubris::webhost_listener::webhost_listener(webhost_interface *webhost)
@@ -17,14 +18,19 @@ bool colubris::webhost_listener::start()
 		OutputDebugString(L"failed to register protocol.");
 		return false;
 	}
-	else
-	{
-		return true;
-	}
+
+	return true;
 }
 
 bool colubris::webhost_listener::stop()
 {
+	HRESULT hr = _webhost->unregister_protocol(this->_protocol_handle);
+	if (hr != S_OK)
+	{
+		OutputDebugString(L"Failed to unregister protocol");
+		return false;
+	}
+
 	return true;
 }
 
@@ -99,7 +105,7 @@ void colubris::webhost_listener::on_apppool_allstop_impl(const wchar_t *apppool_
 }
 
 // Private member functions
-
+#pragma warning(disable: 4573)
 void colubris::webhost_listener::init_callbacks()
 {
 	// ConfigManager callbacks
@@ -125,7 +131,7 @@ void colubris::webhost_listener::init_callbacks()
 	_whl_callbacks.pfnWebhostListenerApplicationCreated = [](void *context, LPCWSTR app_key, LPCWSTR path, DWORD site_id, LPCWSTR apppool_id, PBYTE bindings, DWORD num_bindings, BOOL requests_blocked)
 	{
 		auto _this = static_cast<colubris::webhost_listener *>(context);
-		(_this->*&colubris::webhost_listener::on_app_created_impl)(app_key, path, site_id, apppool_id, bindings, num_bindings, static_cast<bool>(requests_blocked));
+		(_this->*&colubris::webhost_listener::on_app_created_impl)(app_key, path, site_id, apppool_id, bindings, num_bindings, requests_blocked > 0);
 	};
 
 	_whl_callbacks.pfnWebhostListenerApplicationDeleted = [](void *context, LPCWSTR app_key)
@@ -149,7 +155,7 @@ void colubris::webhost_listener::init_callbacks()
 	_whl_callbacks.pfnWebhostListenerApplicationRequestsBlockedChanged = [](void *context, LPCWSTR app_key, BOOL requests_blocked)
 	{
 		auto _this = static_cast<colubris::webhost_listener *>(context);
-		(_this->*&colubris::webhost_listener::on_app_requests_blocked_changed_impl)(app_key, requests_blocked);
+		(_this->*&colubris::webhost_listener::on_app_requests_blocked_changed_impl)(app_key, static_cast<bool>(requests_blocked));
 	};
 
 	// AppPool Callbacks
@@ -174,7 +180,7 @@ void colubris::webhost_listener::init_callbacks()
 	_whl_callbacks.pfnWebhostListenerApplicationPoolStateChanged = [](void *context, LPCWSTR apppool_id, BOOL enabled)
 	{
 		auto _this = static_cast<colubris::webhost_listener *>(context);
-		(_this->*&colubris::webhost_listener::on_apppool_state_changed_impl)(apppool_id, enabled);
+		(_this->*&colubris::webhost_listener::on_apppool_state_changed_impl)(apppool_id, static_cast<bool>(enabled));
 	};
 
 	_whl_callbacks.pfnWebhostListenerApplicationPoolCanOpenNewListenerChannelInstance = [](void *context, LPCWSTR apppool_id, DWORD channel_id)

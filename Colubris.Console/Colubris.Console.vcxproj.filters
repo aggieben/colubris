@@ -32,5 +32,8 @@
     <ClCompile Include="Colubris.Console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dispatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

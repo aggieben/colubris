@@ -1,3 +1,4 @@
+#pragma once
 #ifdef COLUBRISLISTENER_EXPORTS
 #define COLUBRISLISTENER_API __declspec(dllexport)
 #else
