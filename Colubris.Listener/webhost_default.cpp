@@ -1,5 +1,9 @@
 #include "stdafx.h"
 #include "webhost_default.hpp"
+#include <sstream>
+#include <string>
+#include <strsafe.h>
+#include <iostream>
 
 HINSTANCE colubris::webhost_default::_dll_handle;
 
@@ -7,9 +11,33 @@ colubris::webhost_default::webhost_default()
 {
 	if (nullptr == _dll_handle)
 	{
-		if (nullptr == (_dll_handle = LoadLibrary(L"whbhstipm.dll")))
+		DWORD err;
+		LPCTSTR msg = nullptr;
+		std::stringstream ss;
+
+		TCHAR inetsrvPath[512];
+		GetSystemDirectory(inetsrvPath, 500);
+		StringCchCat(inetsrvPath, 512, L"\\inetsrv");
+		if (!SetDllDirectory(inetsrvPath))
 		{
-			throw new std::runtime_error("failed to load Webhost IPM DLL");
+			err = GetLastError();
+			FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, NULL, err, 0, (LPWSTR)&msg, 0, NULL);
+			std::wstring lastError(msg);
+			ss << "failed to load WebhostIPM DLL: " << std::string(lastError.begin(), lastError.end());
+			std::cerr << ss.str();
+			throw std::runtime_error(ss.str());
+		}
+
+		if (nullptr == (_dll_handle = LoadLibrary(L"wbhstipm.dll")))
+		{
+			DWORD err = GetLastError();
+			LPCTSTR msg = nullptr;
+			FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, NULL, err, 0, (LPWSTR)&msg, 0, NULL);
+			std::wstring lastError(msg);
+
+			std::stringstream ss;
+			ss << "failed to load Webhost IPM DLL: " << std::string(lastError.begin(), lastError.end());
+			throw std::runtime_error(ss.str());
 		}
 	}
 
