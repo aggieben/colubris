@@ -6,7 +6,6 @@
 #pragma once
 
 #include "targetver.h"
+#include "logging.hpp"
 #include <stdio.h>
 #include <tchar.h>
-#include <boost/log/core.hpp>
-#include <boost/log/trivial.hpp>

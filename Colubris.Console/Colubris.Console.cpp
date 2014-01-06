@@ -10,28 +10,53 @@
 #include <functional>
 #include <vector>
 
-extern std::map <std::string, std::function<bool(colubris_context&, std::vector<std::string>&)>> _dispatch_table;
+namespace colubris {
+	namespace expr = boost::log::expressions;
 
-int strsplit(std::vector<std::string> &toks, std::string &str, char sep = ' ')
-{
-	auto it = str.begin(), pos = str.begin();
-	for (; it != str.end(); it++)
+	extern std::map <std::string, std::function<bool(colubris_context&, std::vector<std::string>&)>> _dispatch_table;
+
+	int strsplit(std::vector<std::string> &toks, std::string &str, char sep = ' ')
 	{
-		if (*it == sep && it - pos > 0)
+		auto it = str.begin(), pos = str.begin();
+		for (; it != str.end(); it++)
 		{
-			toks.push_back(std::string(pos, it));
-			pos = it + 1;
+			if (*it == sep && it - pos > 0)
+			{
+				toks.push_back(std::string(pos, it));
+				pos = it + 1;
+			}
 		}
+
+		if (it - pos > 0)
+			toks.push_back(std::string(pos, it));
+
+		return toks.size();
 	}
 
-	if (it - pos > 0)
-		toks.push_back(std::string(pos, it));
+	void logging_init()
+	{
+		auto core = boost::log::core::get();
+		core->remove_all_sinks();
 
-	return toks.size();
+		boost::shared_ptr<boost::log::sinks::asynchronous_sink<boost::log::sinks::debug_output_backend>> 
+			dbg_out_sink(new boost::log::sinks::asynchronous_sink<boost::log::sinks::debug_output_backend>());
+
+		dbg_out_sink->set_formatter
+			(
+				expr::stream
+					<< "[" << expr::attr<logging::severity_level>("Severity") << "] "
+					<< expr::smessage
+			);
+
+		core->add_sink(dbg_out_sink);
+	}
 }
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	colubris::logging_init();
+	auto &lg = colubris::default_logger::get();
+
 	try
 	{
 		auto webhost = new colubris::webhost_default();
@@ -40,14 +65,16 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		std::string cmd;
 		std::cout << "> ";
-		BOOST_LOG_TRIVIAL(info) << "Hello!";
+
+		BOOST_LOG_SEV(lg, colubris::logging::trace) << "testing";
+
 		while (std::getline(std::cin, cmd))
 		{
 			std::vector<std::string> args;
-			if (strsplit(args, cmd) > 0)
+			if (colubris::strsplit(args, cmd) > 0)
 			{
-				auto it = _dispatch_table.find(args[0]);
-				if (it != _dispatch_table.end())
+				auto it = colubris::_dispatch_table.find(args[0]);
+				if (it != colubris::_dispatch_table.end())
 				{
 					it->second(context, args);
 				}
