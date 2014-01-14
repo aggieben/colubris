@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/aggieben/colubris.png?label=ready)](https://waffle.io/aggieben/colubris)
 colubris
 ========
 
